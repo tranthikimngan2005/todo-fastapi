@@ -1,6 +1,15 @@
 from pydantic import BaseModel, Field
 
-class Todo(BaseModel):
-    id: int
+class TodoCreate(BaseModel):
     title: str = Field(min_length=3, max_length=100)
-    is_done: bool = False
+    description: str | None = None
+
+
+class TodoResponse(BaseModel):
+    id: int
+    title: str
+    description: str | None
+    is_done: bool
+
+    class Config:
+        from_attributes = True
